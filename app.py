@@ -15,7 +15,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-
 # =========================================================
 # DEMONSTRATION DATA
 # =========================================================
@@ -341,5 +340,5 @@ st.caption(
     "Demonstration dashboard — data will be replaced with "
     "verified sources during model development."
 )
-```
+```python
 
