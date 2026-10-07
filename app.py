@@ -76,7 +76,7 @@ with st.sidebar:
 
     st.markdown("### Navigation")
 
-    st.page_link("app.py", label="Dashboard", icon="🏠")
+   st.markdown("🏠 **Dashboard**")
     st.page_link("pages/1_Generation.py", label="Generation", icon="⚡")
     st.page_link("pages/2_Storage.py", label="Energy Storage", icon="🔋")
     st.page_link("pages/3_Grid.py", label="Grid & Transmission", icon="🔌")
