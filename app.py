@@ -1,12 +1,12 @@
+```python
 import streamlit as st
 import pandas as pd
-import numpy as np
 import plotly.express as px
 
 
-# ---------------------------------------------------------
+# =========================================================
 # PAGE CONFIGURATION
-# ---------------------------------------------------------
+# =========================================================
 
 st.set_page_config(
     page_title="IREOF | Renewable Energy Optimization",
@@ -16,11 +16,10 @@ st.set_page_config(
 )
 
 
-# ---------------------------------------------------------
+# =========================================================
 # DEMONSTRATION DATA
-# ---------------------------------------------------------
-# NOTE:
-# These values are demonstration values only.
+# =========================================================
+# These are demonstration values only.
 # They will later be replaced with verified Kenyan energy data.
 
 generation_data = pd.DataFrame({
@@ -40,6 +39,7 @@ generation_data = pd.DataFrame({
     ]
 })
 
+
 time_data = pd.DataFrame({
     "Hour": list(range(1, 25)),
     "Demand_MW": [
@@ -57,9 +57,9 @@ time_data = pd.DataFrame({
 })
 
 
-# ---------------------------------------------------------
+# =========================================================
 # SIDEBAR
-# ---------------------------------------------------------
+# =========================================================
 
 with st.sidebar:
 
@@ -76,14 +76,18 @@ with st.sidebar:
 
     st.markdown("### Navigation")
 
-   st.markdown("🏠 **Dashboard**")
-    st.page_link("pages/1_Generation.py", label="Generation", icon="⚡")
-    st.page_link("pages/2_Storage.py", label="Energy Storage", icon="🔋")
-    st.page_link("pages/3_Grid.py", label="Grid & Transmission", icon="🔌")
-    st.page_link("pages/4_Optimization.py", label="Optimization", icon="🧠")
-    st.page_link("pages/5_Scenarios.py", label="Scenario Analysis", icon="📊")
-    st.page_link("pages/6_GIS_Map.py", label="GIS Map", icon="🗺️")
-    st.page_link("pages/7_About.py", label="About IREOF", icon="ℹ️")
+    st.markdown("🏠 **Dashboard**")
+
+    st.divider()
+
+    st.markdown("### Coming Soon")
+
+    st.markdown("⚡ Generation")
+    st.markdown("🔋 Energy Storage")
+    st.markdown("🔌 Grid & Transmission")
+    st.markdown("🧠 Optimization")
+    st.markdown("📊 Scenario Analysis")
+    st.markdown("🗺️ GIS Map")
 
     st.divider()
 
@@ -91,9 +95,9 @@ with st.sidebar:
     st.caption("Demonstration Version")
 
 
-# ---------------------------------------------------------
+# =========================================================
 # MAIN HEADER
-# ---------------------------------------------------------
+# =========================================================
 
 st.title("⚡ IREOF Dashboard")
 
@@ -112,57 +116,65 @@ st.markdown(
 st.divider()
 
 
-# ---------------------------------------------------------
+# =========================================================
 # KEY PERFORMANCE INDICATORS
-# ---------------------------------------------------------
+# =========================================================
 
 total_generation = generation_data["Generation_MW"].sum()
 peak_demand = time_data["Demand_MW"].max()
+
 storage_capacity = 500
 renewable_share = 92.0
 curtailment = 4.2
 
+
 col1, col2, col3, col4, col5 = st.columns(5)
+
 
 with col1:
     st.metric(
-        "Renewable Generation",
-        f"{total_generation:,.0f} MW"
+        label="Renewable Generation",
+        value=f"{total_generation:,.0f} MW"
     )
+
 
 with col2:
     st.metric(
-        "Peak Demand",
-        f"{peak_demand:,.0f} MW"
+        label="Peak Demand",
+        value=f"{peak_demand:,.0f} MW"
     )
+
 
 with col3:
     st.metric(
-        "Storage Capacity",
-        f"{storage_capacity:,.0f} MWh"
+        label="Storage Capacity",
+        value=f"{storage_capacity:,.0f} MWh"
     )
+
 
 with col4:
     st.metric(
-        "Renewable Share",
-        f"{renewable_share:.1f}%"
+        label="Renewable Share",
+        value=f"{renewable_share:.1f}%"
     )
+
 
 with col5:
     st.metric(
-        "Curtailment",
-        f"{curtailment:.1f}%"
+        label="Curtailment",
+        value=f"{curtailment:.1f}%"
     )
 
 
 st.divider()
 
 
-# ---------------------------------------------------------
+# =========================================================
 # GENERATION VS DEMAND
-# ---------------------------------------------------------
+# =========================================================
 
 st.subheader("Generation and Demand Profile")
+
 
 fig = px.line(
     time_data,
@@ -176,10 +188,12 @@ fig = px.line(
     }
 )
 
+
 fig.update_layout(
     height=450,
     legend_title_text=""
 )
+
 
 st.plotly_chart(
     fig,
@@ -187,11 +201,12 @@ st.plotly_chart(
 )
 
 
-# ---------------------------------------------------------
+# =========================================================
 # GENERATION MIX
-# ---------------------------------------------------------
+# =========================================================
 
 col1, col2 = st.columns(2)
+
 
 with col1:
 
@@ -219,29 +234,31 @@ with col2:
 
     st.subheader("IREOF System Status")
 
-    st.markdown("### 🟢 Generation")
+    st.markdown("**🟢 Generation**")
     st.progress(0.85)
 
-    st.markdown("### 🟡 Energy Storage")
+    st.markdown("**🟡 Energy Storage**")
     st.progress(0.58)
 
-    st.markdown("### 🟢 Transmission")
+    st.markdown("**🟢 Transmission**")
     st.progress(0.78)
 
-    st.markdown("### 🟢 Renewable Integration")
+    st.markdown("**🟢 Renewable Integration**")
     st.progress(0.91)
 
 
 st.divider()
 
 
-# ---------------------------------------------------------
+# =========================================================
 # IREOF FRAMEWORK
-# ---------------------------------------------------------
+# =========================================================
 
 st.subheader("IREOF Framework")
 
+
 col1, col2, col3 = st.columns(3)
+
 
 with col1:
 
@@ -282,9 +299,37 @@ with col3:
     )
 
 
-# ---------------------------------------------------------
+# =========================================================
+# PROJECT STATUS
+# =========================================================
+
+st.divider()
+
+st.subheader("IREOF Development Status")
+
+
+status_col1, status_col2, status_col3, status_col4 = st.columns(4)
+
+
+with status_col1:
+    st.metric("Dashboard", "Active")
+
+
+with status_col2:
+    st.metric("Data Integration", "Pending")
+
+
+with status_col3:
+    st.metric("Optimization Model", "Pending")
+
+
+with status_col4:
+    st.metric("GIS Module", "Pending")
+
+
+# =========================================================
 # FOOTER
-# ---------------------------------------------------------
+# =========================================================
 
 st.divider()
 
@@ -296,3 +341,5 @@ st.caption(
     "Demonstration dashboard — data will be replaced with "
     "verified sources during model development."
 )
+```
+
